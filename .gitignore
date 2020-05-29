@@ -1,6 +1,9 @@
 __pycache__/
 .ipynb_checkpoints/
 *.csv
+*.html
+/data/final_model.pickle
+
 
 # Compiled source #
 ###################
