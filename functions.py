@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
-from scipy.stats import ttest_ind
+import itertools
+import matplotlib.pyplot as plt
+from sklearn.neighbors import BallTree
 
 def yes_to_one(df, cols):
     '''Turn columns with 'Yes' and 'No' values into 1s and 0s.
@@ -32,27 +34,131 @@ def rein_extremes(df, columns):
                    mean - 4*std]
         df[column] = np.select(conditions, choices, df[column])
         
-def two_way_tests(series_list):
-    '''Takes in a list of series and runs a two-sided t-test on every combination within the list.
-    Returns a dictionary with the indices of the tested series as the keys and the test results as the values.
-    '''
-    compare_dict = {}
-    for i in range(len(series_list)):
-        count = i+1
-        while count < len(series_list):
-            compare_dict.update({(i,count): ttest_ind(series_list[i], series_list[count])})
-            count += 1
-    return compare_dict
+def plot_confusion_matrix(cm, classes,
+                          normalize=False,
+                          title='Confusion matrix',
+                          cmap=plt.cm.Blues):
+    """
+    This function prints and plots the confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+    """
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        print("Normalized confusion matrix")
+    else:
+        print('Confusion Matrix, without normalization')
 
-def two_way_tests_dicts(series_dict):
-    '''Takes in a list of series and runs a two-sided t-test on every combination within the list.
-    Returns a dictionary with the indices of the tested series as the keys and the test results as the values.
-    '''
-    series_list = list(series_dict.values())
-    compare_dict = {}
-    for i in range(len(series_list)):
-        count = i+1
-        while count < len(series_list):
-            compare_dict.update({(list(series_dict.keys())[i],list(series_dict.keys())[count]): ttest_ind(series_list[i], series_list[count])})
-            count += 1
-    return compare_dict
+    print(cm)
+
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+
+    fmt = '.2f' if normalize else 'd'
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, format(cm[i, j], fmt), fontsize=15,
+                 horizontalalignment="center", verticalalignment="center",
+                 color="white" if cm[i, j] > thresh else "black")
+
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+    
+def plot_forest_features(model, X):
+    imp_forest = model.feature_importances_
+    # Sort feature importances in descending order
+    indices_forest = np.argsort(imp_forest)[::-1]
+
+    # Rearrange feature names so they match the sorted feature importances
+    names_forest = [X.columns[i] for i in indices_forest]
+
+    # Create plot
+    plt.figure(figsize=(40,6))
+
+    # Create plot title
+    plt.title("Feature Importance")
+
+    # Add bars
+    plt.bar(range(X.shape[1]), imp_forest[indices_forest])
+
+    # Add feature names as x-axis labels
+    plt.xticks(range(X.shape[1]), names_forest, rotation=90)
+
+    # Show plot
+    plt.show()
+    
+    # print a list of feature names and their prevalance in the forest
+    print([(i,j) for i,j in zip(names_forest, imp_forest[indices_forest])])
+    
+        
+## The following code was copied from https://automating-gis-processes.github.io/site/notebooks/L3/nearest-neighbor-faster.html
+## It has been edited slightly to suit my purposes.
+
+def get_nearest(src_points, candidates, k_neighbors=3):
+    """Find nearest neighbors for all source points from a set of candidate points"""
+    # Note: haversine distance which is implemented here is a bit slower than using e.g. 'euclidean' metric
+    # but useful as we get the distance between points in meters
+
+    # Create tree from the candidate points
+    tree = BallTree(candidates, leaf_size=15, metric='haversine')
+
+    # Find closest points and distances
+    distances, indices = tree.query(src_points, k=k_neighbors)
+
+    # Transpose to get distances and indices into arrays
+    distances = distances.transpose()
+    indices = indices.transpose()
+
+    # Get closest indices and distances
+    # note: since I'm running this within the same dataframe, take index 1,
+    # since index 0 will have a distance of 0, it being the same point.
+    closest = indices[1]
+    closest_dist = distances[1]
+
+    # Return indices and distances
+    return (closest, closest_dist)
+
+def nearest_neighbor(gdf1, return_dist=False):
+    """
+    For each point in left_gdf, find closest point in right GeoDataFrame and return them.
+    NOTICE: Assumes that the input Points are in WGS84 projection (lat/lon).
+    """
+    gdf2 = gdf1.copy().reset_index(drop=True)
+
+    first_geom_col = gdf1.geometry.name
+    second_geom_col = gdf2.geometry.name
+
+    # Parse coordinates from points and insert them into a numpy array as RADIANS
+    first_radians = np.array(gdf1[first_geom_col].apply(lambda geom: (geom.x * np.pi / 180, geom.y * np.pi / 180)).to_list())
+    second_radians = np.array(gdf2[second_geom_col].apply(lambda geom: (geom.x * np.pi / 180, geom.y * np.pi / 180)).to_list())
+
+    # Find the nearest points
+    # -----------------------
+    # closest ==> index in gdf2 that corresponds to the closest point
+    # dist ==> distance between the nearest neighbors (in meters)
+
+    closest, dist = get_nearest(src_points=first_radians, candidates=second_radians)
+
+    # Return points from right GeoDataFrame that are closest to points in left GeoDataFrame
+    closest_points = gdf2.loc[closest]
+
+    # Ensure that the index corresponds to the one in gdf1
+    closest_points = closest_points.reset_index(drop=True)
+    
+# the following commented code does not achieve desired result:    
+#     conditions = [gdf1.iloc[closest].health == 'Poor', gdf1.iloc[closest].health == 'Fair']
+#     choices = [0,1]
+
+    # Add distance if requested
+    if return_dist:
+        # Convert to meters from radians
+        earth_radius = 6371000  # meters
+        closest_points['distance'] = dist * earth_radius
+# the following commented code does not achieve desired result:
+#         closest_points['neighbor_health'] = np.select(conditions, choices, 2)
+
+    return closest_points
