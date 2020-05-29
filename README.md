@@ -10,6 +10,7 @@ Using NYC Open Datas's [2015 Street Tree Census Data Set](https://data.cityofnew
 * **archives** folder - Includes scratch notebooks.
 * **charts** folder - PNG files of insightful charts from the project.
 * **data** folder - Main CSV file, description of columns, and pickles (note: csv files too large to upload).
+* **maps** folder - PNG files; screenshots of maps (note: html files are too large to upload.)
 
 
 
