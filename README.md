@@ -26,20 +26,20 @@ Using NYC Open Datas's [2015 Street Tree Census Data Set](https://data.cityofnew
 
 ## Most prevalent features in the model (in order)
 ### Top features (out of 147):
-     Tree diameter 			    (14.8%)
-     Number of trees on block 	(11.2%)
-     Distance to nearest tree 	(9.1%)
-     Sidewalk damage 		    (7.6%)
-     Tree stewards [1-2] 		(5.1%)
+     Tree diameter              (14.8%)
+     Number of trees on block   (11.2%)
+     Distance to nearest tree   (9.1%)
+     Sidewalk damage            (7.6%)
+     Tree stewards [1-2]        (5.1%)
      Root problems [stone]      (4.8%)
-     Species [Norway maple] 	(2.6%)
-     Trunk problems [other] 	(2.4%)
-     Branch problems [light] 	(2.2%)
+     Species [Norway maple]     (2.6%)
+     Trunk problems [other]     (2.4%)
+     Branch problems [light]    (2.2%)
      Species [London planetree] (2.0%)
-     Branch problems [other] 	(2.0%)
-     Community board [503] 	    (1.8%)
-     Species [Honeylocust] 	    (1.3%)
-     Borough [Queens] 		    (1.2%)
+     Branch problems [other]    (2.0%)
+     Community board [503]      (1.8%)
+     Species [Honeylocust]      (1.3%)
+     Borough [Queens]           (1.2%)
 
 
 # Final conclusion
