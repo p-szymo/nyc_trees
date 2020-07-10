@@ -42,3 +42,8 @@ __pycache__/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# files
+PCA_MCA_tests.ipynb
+nyc_trees_final_workbook-Copy1.ipynb
+maps/pro_vol_comparison.psd
