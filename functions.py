@@ -68,42 +68,34 @@ def plot_confusion_matrix(cm, classes,
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     
-# def plot_forest_features(model, X, num_features=10, title='Feature Importance', xlabels=names_forest, to_print=True):
+def plot_forest_features(model, X, num_features=15, to_print=True):
     
-
-#     imp_forest = model.feature_importances_
+    imp_forest = model.feature_importances_
     
-#     # Sort feature importances in descending order
-#     indices_forest = np.argsort(imp_forest)[::-1][:num_features]
+    # sort feature importances in descending order
+    indices_forest = np.argsort(imp_forest)[::-1][:num_features]
 
-#     # Rearrange feature names so they match the sorted feature importances
-#     names_forest = [X.columns[i] for i in indices_forest]
+    # rearrange feature names so they match the sorted feature importances
+    names_forest = [X.columns[i] for i in indices_forest]
 
-#     # Create plot
-#     plt.figure(figsize=(num_features, num_features/1.5))
+    # create plot
+    plt.figure(figsize=(num_features, num_features/1.5))
+    plt.bar(range(num_features), imp_forest[indices_forest])
 
-#     # Create plot title
-#     plt.title(title, fontsize=30, pad=15)
+    # prettify plot
+    plt.title('Feature Importance', fontsize=30, pad=15)
+    plt.ylabel('Average Decrease in Impurity', fontsize=22, labelpad=20)
+    # add feature names as x-axis labels
+    plt.xticks(range(num_features), names_forest, fontsize=20, rotation=90)
+    plt.tick_params(axis="y", labelsize=20)
+
+    # Show plot
+    plt.tight_layout()
+    plt.show()
     
-# #     plt.xlabel('Feature', fontsize=22, labelpad=20)
-    
-#     plt.ylabel('Average Decrease in Impurity', fontsize=22, labelpad=20)
-
-#     # Add bars
-#     plt.bar(range(num_features), imp_forest[indices_forest])
-
-#     # Add feature names as x-axis labels
-#     plt.xticks(range(num_features), xlabels, fontsize=20, rotation=70)
-    
-#     plt.tick_params(axis="y", labelsize=20)
-
-#     # Show plot
-#     plt.tight_layout()
-#     plt.show()
-    
-#     if to_print:
-#         # print a list of feature names and their prevalance in the forest
-#         print([(i,j) for i,j in zip(names_forest, imp_forest[indices_forest])])
+    if to_print:
+        # print a list of feature names and their prevalance in the forest
+        print([(i,j) for i,j in zip(names_forest, imp_forest[indices_forest])])
     
         
 ## The following code was copied from https://automating-gis-processes.github.io/site/notebooks/L3/nearest-neighbor-faster.html
