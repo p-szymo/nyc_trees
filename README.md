@@ -2,7 +2,7 @@
 
 #### Using NYC Open Data's [2015 Street Tree Census Data Set](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/pi5s-9p35) (click **Export** to download a non-geospatial version of the dataset), I will conduct exploratory data analysis and feature engineering to find the significance of certain variables on the health of NYC street trees. I then create a classification model to gain further insights into which factors play a role in a tree's health.
 
-##### Ultimately, my goal is to determine which features most help my model perform well and what information may be helpful for future censuses and policy in general. In the future, I would like to create a list of volunteer data entries for which the health status does not match that of my model. This list could be used to have professionals double-check the work of volunteers and re-determine a tree's health if necessary.
+#### Ultimately, my goal is to determine which features most help my model perform well and what information may be helpful for future censuses and policy in general. In the future, I would like to create a list of volunteer data entries for which the health status does not match that of my model. This list could be used to have professionals double-check the work of volunteers and re-determine a tree's health if necessary.
 
 #### Answer the following questions:
 - *What features are most important in determining the health of a tree?*
