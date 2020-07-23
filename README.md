@@ -50,13 +50,11 @@ I can run my final model on the data collected by volunteers and compile a list 
 
 ## List of files
 - **functions.py** - text file with functions for data cleaning and statistical tests.
-- **nyc_trees_final_notebook.ipynb** - Jupyter Notebook for data exploration and classification modeling.
-- **nyc_trees_workbook_mapmaking.ipynb** - Jupyter Notebook for making maps of NYC street trees.
+- **eda_modeling_evaluation.ipynb** - Jupyter Notebook for data exploration and classification modeling.
+- **maps_creations.ipynb** - Jupyter Notebook for making maps of NYC street trees.
 - **presentation.pdf** - presentation for New York City Department of Parks and Recreation with my findings.
 - **archives** folder - Includes scratch notebooks.
-- **charts** folder - PNG files of insightful charts from the project.
-- **data** folder - Main CSV file, description of columns, and pickles (note: csv files too large to upload).
-- **maps** folder - PNG files; screenshots of maps (note: html files are too large to upload.)
+- **images** folder - insightful charts and maps from the project.
 
 
 
