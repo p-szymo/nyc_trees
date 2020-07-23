@@ -44,6 +44,7 @@ Ultimately, my goal is to determine which features most help my model perform we
     Tree guards [helpful]       (0.9%)
     Root problems [other]       (0.9%)
 
+[Top Features - Random Forest](images/charts/final_model_feature_importances.png)
 
 # Final conclusion
 I can run my final model on the data collected by volunteers and compile a list of trees for which health statuses do not match. As it stands, the NYC Street Trees Census is fairly thorough and rife with opportunities for data exploration and predictive modeling. Perhaps with a neural network, I could greatly improve my model, although computational power is a limiting factor there. In future censuses, even more data could be gathered (especially in regard to specificity of tree problems) that will increase opportunities for prediction even further.
@@ -53,7 +54,7 @@ I can run my final model on the data collected by volunteers and compile a list 
 - **eda_modeling_evaluation.ipynb** - Jupyter Notebook for data exploration and classification modeling.
 - **maps_creations.ipynb** - Jupyter Notebook for making maps of NYC street trees.
 - **presentation.pdf** - presentation for New York City Department of Parks and Recreation with my findings.
-- **archives** folder - Includes scratch notebooks.
+- **archives** folder - scrap notebooks.
 - **images** folder - insightful charts and maps from the project.
 
 
