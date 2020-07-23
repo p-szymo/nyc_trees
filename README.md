@@ -16,18 +16,26 @@ Ultimately, my goal is to determine which features most help my model perform we
 ## Findings
 - Species of tree is significant, Norway maple having the lowest rate of trees in good health on average, and sawtooth oak having the highest rate.
     - I would recommend sticking to the healthier varieties in the graph seen below, and avoiding the least healthy varieties.
+![Tree Health Across Species](images/charts/health_species_barstack.png)
+
 - Problems with the tree itself were obviously significant.
     - Unfortunately, problems that were listed as *Other* appear to hold the highest significance.
     - In the next census, I recommend including columns with more specificity or a notes column (which one could analyze using NLP).
     - I suggest conducting more regular maintenance, as well as pushing for environmental protections, in the style of the plastic ban bag.
+![Tree Health with Root, Trunk, and Branch Problems](images/charts/health_problems_3barstack.png)
+
 - All levels of neighborhood delineation held significance.
     - I chose community board as my neighborhood variable in part because one must petition the community board to make changes to street trees.
+![Tree Health Across Community Boards](images/charts/health_cb_barstack.png)
+
 - It's difficult to choose which model to use based off of numbers alone. One must think carefully about how it is being used.
     - I went with a model that was more inaccurate but had a better spread of predictions. Not ready for primetime yet, but a step in the right direction.
     - I created a metric--precision of *Good* predictions--that serves as a fairly good proxy for the results I'm looking for, though more investigation may be necessary.
+![Random Forest Confusion Matrices Comparison](images/charts/forest_cm_comparison.png)
+
 - Many of the most prevalent features, including number of trees on block, distance to the nearest tree, and sidewalk damage, didn’t show much significance when looked at during EDA, but must have had solid predictive power after interacting with other branches of the Random Forest trees.
 
-## Top features in the model (in order of average decrease in Gini impurity), out of 147:
+## Top features in the model (in order of average decrease in Gini impurity), out of 147 total features:
     Distance to nearest tree    (15.8%)
     Number of trees on block    (14.0%)
     Tree diameter               (13.7%)
