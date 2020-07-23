@@ -15,7 +15,8 @@ Ultimately, my goal is to determine which features most help my model perform we
 
 ## Findings
 - Species of tree is significant, Norway maple having the lowest rate of trees in good health on average, and sawtooth oak having the highest rate.
-    - I would recommend sticking to the healthier varieties in the graph seen below, and avoiding the least healthy varieties.
+    - I would recommend sticking to the healthier varieties (toward the right side of the graph seen below) and avoiding the least healthy varieties (toward the left of the graph).
+        - *NOTE: graph sorted by proportion of trees in* Good *health, in ascending order.*
 ![Tree Health Across Species](images/charts/health_species_barstack.png)
 
 - Problems with the tree itself were obviously significant.
@@ -33,7 +34,7 @@ Ultimately, my goal is to determine which features most help my model perform we
     - I created a metric--precision of *Good* predictions--that serves as a fairly good proxy for the results I'm looking for, though more investigation may be necessary.
 ![Random Forest Confusion Matrices Comparison](images/charts/forest_cm_comparison.png)
 
-- Many of the most prevalent features, including number of trees on block, distance to the nearest tree, and sidewalk damage, didn’t show much significance when looked at during EDA, but must have had solid predictive power after interacting with other branches of the Random Forest trees.
+- Many of the most important features--including, but not limited to, the number of trees on the same block, distance to the nearest tree, and presence of sidewalk damage--didn’t show much significance when looked at during EDA, but must have had solid predictive power after interacting with other branches of the Random Forest trees.
 
 ## Top features in the model (in order of average decrease in Gini impurity), out of 147 total features:
     Distance to nearest tree    (15.8%)
