@@ -193,59 +193,43 @@ def get_nearest(src_points, candidates, k_neighbors=3):
     distances = distances.transpose()
     indices = indices.transpose()
 
-    # get closest indices and distances
-        # NOTE: since I'm running this within the same dataframe, take index 1,
-        # since index 0 will have a distance of 0, it being the same point.
-    closest = indices[1]
+    # keep index of tree whose neighbor is being found and distance to the neighbor
+        # NOTE: since I'm running this within the same dataframe, take distances 1,
+        # since distances[0] will have a distance of 0, it being the same point.
+    target_tree = indices[0]
     closest_dist = distances[1]
 
     # output indices and distances
-    return (closest, closest_dist)
+    return (target_tree, closest_dist)
 
-def nearest_neighbor(gdf1, return_dist=False):
+def nearest_neighbor(gdf1, name=None):
     
     """
     Function to find the nearest point within same GeoDataFrame.
     Code slightly modified from: https://automating-gis-processes.github.io/site/notebooks/L3/nearest-neighbor-faster.html
     
-    Input GeoPandas GeoDataFrame. Optionally choose to return distance calculations.
+    Input GeoPandas GeoDataFrame. Optional input name for the return Pandas Series (defaults to None).
     NOTE: Assumes that the input Points are in WGS84 projection (lat/lon).
     
-    Output GeoDataFrame.
+    Output Pandas Series.
     """
     
-    # make a copy of geodataframe for comparison
-    gdf2 = gdf1.copy().reset_index(drop=True)
-
-    # graph latitudes and longitudes
-    first_geom_col = gdf1.geometry.name
-    second_geom_col = gdf2.geometry.name
-
     # parse coordinates from points and insert them into a numpy array as RADIANS
-    first_radians = np.array(gdf1[first_geom_col].apply(lambda geom: (geom.x * np.pi / 180, geom.y * np.pi / 180)).to_list())
-    second_radians = np.array(gdf2[second_geom_col].apply(lambda geom: (geom.x * np.pi / 180, geom.y * np.pi / 180)).to_list())
+    radians = np.array(gdf1['geometry'].apply(lambda geom: (geom.x * np.pi / 180, geom.y * np.pi / 180)).to_list())
 
     # find the nearest points
     # -----------------------
-    # closest ==> index in gdf2 that corresponds to the closest point
-    # dist ==> distance between the nearest neighbors (in meters)
+    # tree ==> index that corresponds to the tree whose closest neighbor is being measured
+    # neighbor_dist ==> distance to tree's closest neighbor (in meters)
 
-    closest, dist = get_nearest(src_points=first_radians, candidates=second_radians)
+    tree, neighbor_dist = get_nearest(src_points=radians, candidates=radians)
 
-    # return points from right geodataframe that are closest to points in left geodataframe
-    closest_points = gdf2.loc[closest]
+    # convert to meters from radians into a pandas series
+    earth_radius = 6371000
+    distances = pd.Series(neighbor_dist * earth_radius, name=name)
 
-    # ensure that the index corresponds to the one in gdf1
-    closest_points = closest_points.reset_index(drop=True)
-
-    # add distance if requested
-    if return_dist:
-        # convert to meters from radians
-        earth_radius = 6371000  # meters
-        closest_points['distance'] = dist * earth_radius
-
-    # output geodataframe
-    return closest_points
+    # output geodataframe with new column
+    return distances
 
 
 # custom scoring function
