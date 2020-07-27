@@ -98,7 +98,7 @@ def plot_confusion_matrix(cm, classes,
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
-    Code modified from work by SeanAbu Wilson.
+    Code modified from work by Sean Abu Wilson.
     """
     
     # convert to percentage, if normalize set to True
@@ -134,7 +134,7 @@ def plot_forest_features(model, X, num_features=15, to_print=True):
     This function plots feature importances for Random Forest models and optionally prints them.
     Printing can be turned off by setting `to_print=False`.
     All feature importances can be shown by setting `num_features=X.shape[1]`.
-    Code modified from work by SeanAbu Wilson.
+    Code modified from work by Sean Abu Wilson.
     """
     
     # list of tuples (column index, measure of feature importance)
@@ -206,7 +206,7 @@ def nearest_neighbor(gdf1, name=None):
     
     """
     Function to find the nearest point within same GeoDataFrame.
-    Code slightly modified from: https://automating-gis-processes.github.io/site/notebooks/L3/nearest-neighbor-faster.html
+    Code modified from: https://automating-gis-processes.github.io/site/notebooks/L3/nearest-neighbor-faster.html
     
     Input GeoPandas GeoDataFrame. Optional input name for the return Pandas Series (defaults to None).
     NOTE: Assumes that the input Points are in WGS84 projection (lat/lon).

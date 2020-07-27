@@ -2,7 +2,6 @@ __pycache__/
 .ipynb_checkpoints/
 *.csv
 *.html
-/data
 
 
 # Compiled source #
@@ -42,6 +41,11 @@ __pycache__/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# data files
+*.csv
+*.psd
+*.pickle
 
 # files
 PCA_MCA_tests.ipynb
