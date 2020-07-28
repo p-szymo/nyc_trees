@@ -70,6 +70,7 @@ In the meantime, the NYC Street Trees Census is fairly thorough and rife with op
 - **maps_creations.ipynb** - Jupyter Notebook for making maps of NYC street trees.
 - **presentation.pdf** - presentation for New York City Department of Parks and Recreation with my findings.
 - **archives** folder - scrap notebooks.
+- **data** folder - cleaned data and variable descriptions.
 - **images** folder - insightful charts and maps from the project.
 
 
