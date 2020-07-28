@@ -60,7 +60,9 @@ Ultimately, my goal is to determine which features most help my model perform we
 ![Top Features - Random Forest](images/charts/final_model_feature_importances.png)
 
 # Final conclusion
-I can run my final model on the data collected by volunteers and compile a list of trees for which health statuses do not match. As it stands, the NYC Street Trees Census is fairly thorough and rife with opportunities for data exploration and predictive modeling. Perhaps with a neural network, I could greatly improve my model, although computational power is a limiting factor there. In future censuses, even more data could be gathered (especially in regard to specificity of tree problems) that will increase opportunities for prediction even further.
+Although I don't think it's ready for rollout just yet, I can run my final model on the data collected by volunteers and compile a list of trees whose health statuses do not match. I could potentially create a better model using a neural network, but that may be too computationally expensive. Instead, I think the next steps for this project will include transforming this into a binary classification problem (i.e. *Good* vs. *Not Good* by combining trees with *Fair* and *Poor* health status), which would surely improve the model's metrics, while still addressing the project's goals.
+
+In the meantime, the NYC Street Trees Census is fairly thorough and rife with opportunities for data exploration and predictive modeling. In future censuses, even more data could be gathered (especially regarding the specificity of problems with a tree's roots, trunk, and branches) that will improve prediction even further.
 
 ## List of files
 - **functions.py** - text file with functions for data cleaning and statistical tests.
