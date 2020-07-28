@@ -14,6 +14,9 @@ Ultimately, my goal is to determine which features most help my model perform we
 - *Do maps shed any light on any issues with the census?*
 
 ## Findings
+- Volunteers did not make it out to the outer edges of the city and tended to rate trees more poorly (lower rate of *Good*-rated trees compared to professional staff).
+![Professional vs. Volunteer Entries](images/maps/pro_vol_comparison.png)
+
 - Species of tree is significant, Norway maple having the lowest rate of trees in good health on average, and sawtooth oak having the highest rate.
     - I would recommend sticking to the healthier varieties (toward the right side of the graph seen below) and avoiding the least healthy varieties (toward the left of the graph).
         - *NOTE: graph sorted by proportion of trees in* Good *health, in ascending order.*
@@ -37,21 +40,22 @@ Ultimately, my goal is to determine which features most help my model perform we
 - Many of the most important features--including, but not limited to, the number of trees on the same block, distance to the nearest tree, and presence of sidewalk damage--didn’t show much significance when looked at during EDA, but must have had solid predictive power after interacting with other branches of the Random Forest trees.
 
 ## Top features in the model (in order of average decrease in Gini impurity), out of 147 total features:
-    Distance to nearest tree    (15.8%)
-    Number of trees on block    (14.0%)
-    Tree diameter               (13.7%)
-    Species [Norway maple]      (2.1%)
-    Branch problems [other]     (2.1%)
-    Tree stewards [1-2]         (2.1%)
-    Trunk problems [other]      (2.1%)
-    Sidewalk damage             (1.9%)
-    Root problems [stone]       (1.3%)
+    Distance to nearest tree    (15.9%)
+    Tree diameter               (14.0%)
+    Number of trees on block    (12.9%)
+    Species [Norway maple]      (3.0%)
+    Trunk problems [other]      (2.8%)
+    Branch problems [other]     (2.7%)
+    Tree stewards [1-2]         (2.0%)
+    Sidewalk damage             (1.8%)
+    Root problems [stone]       (1.4%)
+    Species [London planetree]  (1.3%)
+    Species [Honeylocust]       (1.3%)
     Branch problems [light]     (1.2%)
-    On curb                     (1.1%)
-    Species [London planetree]  (1.1%)
-    Species [Honeylocust]       (1.1%)
-    Tree guards [helpful]       (0.9%)
+    On curb                     (1.0%)  
+    Community board [414]       (0.9%)
     Root problems [other]       (0.9%)
+
 
 ![Top Features - Random Forest](images/charts/final_model_feature_importances.png)
 

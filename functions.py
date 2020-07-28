@@ -96,9 +96,13 @@ def plot_confusion_matrix(cm, classes,
                           cmap=plt.cm.Blues):
     
     """
-    This function prints and plots the confusion matrix.
+    This function prints and plots a model's confusion matrix.
+    
+    Input an sklearn confusion matrix and list of class names. Optionally input a title (string) and color map.
+    
     Normalization can be applied by setting `normalize=True`.
-    Code modified from work by Sean Abu Wilson.
+    
+    [Code modified from work by Sean Abu Wilson.]
     """
     
     # convert to percentage, if normalize set to True
@@ -131,10 +135,18 @@ def plot_confusion_matrix(cm, classes,
 def plot_forest_features(model, X, num_features=15, to_print=True):
     
     """
-    This function plots feature importances for Random Forest models and optionally prints them.
+    This function plots feature importances for Random Forest models and optionally prints 
+    a dictionary with features and their measure of importance.
+    
+    Input a model, features as a pandas DataFrame, and the number of features to plot/print (default=15).
+    
     Printing can be turned off by setting `to_print=False`.
+    
     All feature importances can be shown by setting `num_features=X.shape[1]`.
-    Code modified from work by Sean Abu Wilson.
+    
+    Output bar graph and optional dictionary printout.
+    
+    [Code modified from work by Sean Abu Wilson.]
     """
     
     # list of tuples (column index, measure of feature importance)
