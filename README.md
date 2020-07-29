@@ -1,8 +1,12 @@
 # Verifying Volunteer Entries to the NYC Street Tree Census
 
-Using NYC Open Data's [2015 Street Tree Census Data Set](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/pi5s-9p35) (click **Export** to download a non-geospatial version of the dataset), I conduct exploratory data analysis and feature engineering to find the significance of certain variables on the health of NYC street trees. I then create a classification model to gain further insights into which factors play a role in a tree's health.
+Using NYC Open Data's [2015 Street Tree Census Data Set](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/pi5s-9p35) (click **Export** to download a non-geospatial version of the dataset), I conduct exploratory data analysis and feature engineering to find the significance of certain variables on the health of NYC street trees.
 
-Ultimately, my goal is to determine which features most help my model perform well and what information may be helpful for future censuses and policy in general. In the future, I would like to create a list of volunteer data entries for which the health status does not match that of my model's predictions. This list could be used by professionals to double-check the work of volunteers and re-determine a tree's health if necessary.
+I then create a classification model to gain further insights into which factors play a role in a tree's health.
+
+Ultimately, my goal is to determine which features most help my model perform well and what information may be helpful for future censuses and policy in general.
+
+In the future, I would like to create a list of volunteer data entries for which the health status does not match that of my model's predictions. This list could be used by professionals to double-check the work of volunteers and re-determine a tree's health if necessary.
 
 #### Answer the following questions:
 - *What features are most important in determining the health of a tree?*
@@ -20,21 +24,25 @@ Ultimately, my goal is to determine which features most help my model perform we
 - Species of tree is significant, Norway maple having the lowest rate of trees in good health on average, and sawtooth oak having the highest rate.
     - I would recommend sticking to the healthier varieties (toward the right side of the graph seen below) and avoiding the least healthy varieties (toward the left of the graph).
         - *NOTE: graph sorted by proportion of trees in* Good *health, in ascending order.*
+
 ![Tree Health Across Species](images/charts/health_species_barstack.png)
 
 - Problems with the tree itself were obviously significant.
     - Unfortunately, problems that were listed as *Other* appear to hold the highest significance.
     - In the next census, I recommend including columns with more specificity or a notes column (which one could analyze using NLP).
     - I suggest conducting more regular maintenance, as well as pushing for environmental protections, in the style of the plastic ban bag.
+
 ![Tree Health with Root, Trunk, and Branch Problems](images/charts/health_problems_3barstack.png)
 
 - All levels of neighborhood delineation held significance.
     - I chose community board as my neighborhood variable in part because one must petition the community board to make changes to street trees.
+
 ![Tree Health Across Community Boards](images/charts/health_cb_barstack.png)
 
 - It's difficult to choose which model to use based off of numbers alone. One must think carefully about how it is being used.
     - I went with a model that was more inaccurate but had a better spread of predictions. Not ready for primetime yet, but a step in the right direction.
     - I created a metric--precision of *Good* predictions--that serves as a fairly good proxy for the results I'm looking for, though more investigation may be necessary.
+
 ![Random Forest Confusion Matrices Comparison](images/charts/forest_cm_comparison.png)
 
 - Many of the most important features--including, but not limited to, the number of trees on the same block, distance to the nearest tree, and presence of sidewalk damage--didn’t show much significance when looked at during EDA, but must have had solid predictive power after interacting with other branches of the Random Forest trees.
@@ -56,11 +64,12 @@ Ultimately, my goal is to determine which features most help my model perform we
     Community board [414]       (0.9%)
     Root problems [other]       (0.9%)
 
-
 ![Top Features - Random Forest](images/charts/final_model_feature_importances.png)
 
 # Final conclusion
-Although I don't think it's ready for rollout just yet, I can run my final model on the data collected by volunteers and compile a list of trees whose health statuses do not match. I could potentially create a better model using a neural network, but that may be too computationally expensive. Instead, I think the next steps for this project will include transforming this into a binary classification problem (i.e. *Good* vs. *Not Good* by combining trees with *Fair* and *Poor* health status), which would surely improve the model's metrics, while still addressing the project's goals.
+Although I don't think it's ready for rollout just yet, I can run my final model on the data collected by volunteers and compile a list of trees whose health statuses do not match. I could potentially create a better model using a neural network, but that may be too computationally expensive.
+
+Instead, I think the next steps for this project will include transforming this into a binary classification problem (i.e. *Good* vs. *Not Good* by combining trees with *Fair* and *Poor* health status), which would surely improve the model's metrics, while still addressing the project's goals.
 
 In the meantime, the NYC Street Trees Census is fairly thorough and rife with opportunities for data exploration and predictive modeling. In future censuses, even more data could be gathered (especially regarding the specificity of problems with a tree's roots, trunk, and branches) that will improve prediction even further.
 
@@ -72,7 +81,5 @@ In the meantime, the NYC Street Trees Census is fairly thorough and rife with op
 - **archives** folder - scrap notebooks.
 - **data** folder - cleaned data and variable descriptions.
 - **images** folder - insightful charts and maps from the project.
-
-
 
 ## Check out my [blog post](https://medium.com/@joshua.szymanowski/new-york-forest-rangers-d11b19e386a8)
