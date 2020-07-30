@@ -11,21 +11,27 @@ In the future, I would like to create a list of volunteer data entries for which
 
 ## Objectives
 1. Investigate any notable differences between professional and volunteer entries to the census.
-2. Discover features that are important in determining the health of a tree. Use this information to make policy recommendations
+2. Discover features that are important in determining the health of a tree. Use this information to make policy recommendations.
 3. Engineer features to see if any data could be added in future censuses. Additionally, determine if there are there other data that could be collected in the future.
-4. Build a classifcation model using only professional entries to determine the health of a tree. Use it to predict tree health for volunteer entries and compare results with volunteer judgments.
+4. Build a classification model using only professional entries to determine the health of a tree. Use it to predict tree health for volunteer entries and compare results with volunteer judgments.
 5. Use maps to bolster discoveries, if possible.
 
 ## Findings
+### 1. Professional entries vs. Volunteer entries
+
 - Volunteers did not make it out to the outer edges of the city and tended to rate trees more poorly (lower rate of *Good*-rated trees compared to professional staff).
 
 ![Professional vs. Volunteer Entries](images/maps/pro_vol_comparison.png)
 
+#### Tree health breakdown for professional and volunteer entries
 |      | Professional | Volunteer |
 |:----:|:------------:|:---------:|
 | Good | 81.8%        | 79.5%     |
 | Fair | 14.2%        | 16.1%     |
 | Poor | 4.0%         | 4.4%      |
+
+<br/><br/>
+### 2. Discover important features already present in data
 
 - Species of tree is significant, Norway maple having the lowest rate of trees in good health on average, and sawtooth oak having the highest rate.
     - I would recommend sticking to the healthier varieties (toward the right side of the graph seen below) and avoiding the least healthy varieties (toward the left of the graph).
@@ -45,6 +51,16 @@ In the future, I would like to create a list of volunteer data entries for which
 
 ![Tree Health Across Community Boards](images/charts/health_cb_barstack.png)
 
+<br/><br/>
+### 3. Feature engineering
+
+- ```block_count``` - the number of trees on the block.
+    - I wanted to see if tree density may have anything to do with health, but found no discernible relationship during EDA. My classification model, however, told a different story (see below).
+- ```neighbor_dist``` - distance (in meters) to the nearest tree.
+    - Similar to the above feature, I wondered if two trees being close together would negatively impact health. Again, during EDA, I found no relationship. And again, my classification model told a different story (see below).
+
+### 4. Modeling
+
 - It's difficult to choose which model to use based off of numbers alone. One must think carefully about how it is being used.
     - I went with a model that was more inaccurate but had a better spread of predictions. Not ready for primetime yet, but a step in the right direction.
     - I created a metric--precision of *Good* predictions--that serves as a fairly good proxy for the results I'm looking for, though more investigation may be necessary.
@@ -53,7 +69,7 @@ In the future, I would like to create a list of volunteer data entries for which
 
 - Many of the most important features--including, but not limited to, the number of trees on the same block, distance to the nearest tree, and presence of sidewalk damage--didn’t show much significance when looked at during EDA, but must have had solid predictive power after interacting with other branches of the Random Forest trees.
 
-## Top features in the model (in order of average decrease in Gini impurity), out of 147 total features:
+### Top features in the model (in order of average decrease in Gini impurity), out of 147 total features:
     Distance to nearest tree    (15.9%)
     Tree diameter               (14.0%)
     Number of trees on block    (12.9%)

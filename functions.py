@@ -335,9 +335,9 @@ def nearest_neighbor(gdf, name=None):
 
     tree, neighbor_dist = get_nearest(src_points=radians, candidates=radians)
 
-    # convert to meters from radians into a pandas series
+    # convert to meters from radians and into a pandas series, using index from input gdf
     earth_radius = 6371000
-    distances = pd.Series(neighbor_dist * earth_radius, name=name)
+    distances = pd.Series(neighbor_dist * earth_radius, index=gdf.index, name=name)
 
     # output geodataframe with new column
     return distances
