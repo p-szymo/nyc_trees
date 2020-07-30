@@ -1,5 +1,6 @@
 # Verifying Volunteer Entries to the NYC Street Tree Census
 
+## Summary
 Using NYC Open Data's [2015 Street Tree Census Data Set](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/pi5s-9p35) (click **Export** to download a non-geospatial version of the dataset), I conduct exploratory data analysis and feature engineering to find the significance of certain variables on the health of NYC street trees.
 
 I then create a classification model to gain further insights into which factors play a role in a tree's health.
@@ -8,18 +9,23 @@ Ultimately, my goal is to determine which features most help my model perform we
 
 In the future, I would like to create a list of volunteer data entries for which the health status does not match that of my model's predictions. This list could be used by professionals to double-check the work of volunteers and re-determine a tree's health if necessary.
 
-#### Answer the following questions:
-- *What features are most important in determining the health of a tree?*
-    - *Hypothesis:* Neighborhood and problems in trunk, root, or branches will be the most important.
-- *Are there any features that may help in future censuses?*
-    - *Hypothesis*: Age of the tree would be a great variable to include.
-- *What do the numbers of entries for each class of tree health tell us about volunteer efforts?*
-    - *Hypothesis*: Volunteers tend to rate trees in better condition.
-- *Do maps shed any light on any issues with the census?*
+## Objectives
+1. Investigate any notable differences between professional and volunteer entries to the census.
+2. Discover features that are important in determining the health of a tree. Use this information to make policy recommendations
+3. Engineer features to see if any data could be added in future censuses. Additionally, determine if there are there other data that could be collected in the future.
+4. Build a classifcation model using only professional entries to determine the health of a tree. Use it to predict tree health for volunteer entries and compare results with volunteer judgments.
+5. Use maps to bolster discoveries, if possible.
 
 ## Findings
 - Volunteers did not make it out to the outer edges of the city and tended to rate trees more poorly (lower rate of *Good*-rated trees compared to professional staff).
+
 ![Professional vs. Volunteer Entries](images/maps/pro_vol_comparison.png)
+
+|      | Professional | Volunteer |
+|:----:|:------------:|:---------:|
+| Good | 81.8%        | 79.5%     |
+| Fair | 14.2%        | 16.1%     |
+| Poor | 4.0%         | 4.4%      |
 
 - Species of tree is significant, Norway maple having the lowest rate of trees in good health on average, and sawtooth oak having the highest rate.
     - I would recommend sticking to the healthier varieties (toward the right side of the graph seen below) and avoiding the least healthy varieties (toward the left of the graph).
