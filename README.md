@@ -96,6 +96,8 @@ Finally, I create a list of volunteer data entries for which the health status d
 # Conclusions
 I ran my final model on the data collected by volunteers and compiled a list of trees for which the health status determined by volunteers differs from that predicted by my model. The list totals 78,645 trees, which is a bit higher than is feasible to check in the real world. If a team of ten people each looked at 100 trees a day, it would take them roughly four months to look at every tree.
 
+Still, I was able to use the data from the 2015 census to back up policy proposals that make sense for NYC's Department of Parks and Recreation and are possibly already in the works. Furthermore, I identified some key areas of improvement for data collection during the next street tree census in 2025.
+
 ## Next steps
 I could potentially create a better model using a neural network, but that may be too computationally expensive with a dataset this large.
 
