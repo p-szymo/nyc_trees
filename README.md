@@ -94,7 +94,7 @@ Finally, I create a list of volunteer data entries for which the health status d
 - To look at and recreate my maps (or build your own), refer to the mapmaking notebook in this repository.
 
 # Conclusions
-I ran my final model on the data collected by volunteers and compiled a list of trees for which the health status determined by volunteers differs from that predicted by my model. The list totals 78,645 trees, which is a bit higher than is feasible to check in the real world. If a team of ten people looked at 100 trees each a day, it would take them roughly four months to look at every tree.
+I ran my final model on the data collected by volunteers and compiled a list of trees for which the health status determined by volunteers differs from that predicted by my model. The list totals 78,645 trees, which is a bit higher than is feasible to check in the real world. If a team of ten people each looked at 100 trees a day, it would take them roughly four months to look at every tree.
 
 ## Next steps
 I could potentially create a better model using a neural network, but that may be too computationally expensive with a dataset this large.
@@ -112,7 +112,7 @@ In the meantime, the NYC Street Trees Census is fairly thorough and rife with op
 - **eda_modeling_evaluation.ipynb** - Jupyter Notebook for data exploration and classification modeling.
 - **functions.py** - text file with functions for data cleaning and statistical tests.
 - **mapmaking.ipynb** - Jupyter Notebook for making maps of NYC street trees.
-    - *NOTE: meant to be more of a sandbox than a polished workbook.*
+    - *NOTE: this is meant to be more of a sandbox than a polished workbook.*
 - **presentation.pdf** - presentation for New York City Department of Parks and Recreation with my findings.
 - **volunteer_verification.ipynb** - Jupyter Notebook using my model to predict on volunteer entries and build a list of trees for which the health status determined by volunteers differs from that predicted by my model.
 
