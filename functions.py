@@ -17,6 +17,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 # dummy yes/no columns
 def yes_to_one(df, cols):
+    
     '''
     Turn columns with 'Yes' and 'No' values into 1s and 0s.
 
@@ -38,6 +39,7 @@ def yes_to_one(df, cols):
 
 # find outliers
 def find_extremes(df, num_std):
+    
     '''
     Function to find columns that contain outlier values.
 
@@ -74,6 +76,7 @@ def find_extremes(df, num_std):
 
 # control value of outliers
 def rein_extremes(df, columns, num_std):
+    
     '''
     Function to replace outlier values using a multiple of the data's
     standard deviation.
@@ -116,6 +119,7 @@ def plot_confusion_matrix(cm, classes,
                           normalize=False,
                           title='Confusion matrix',
                           cmap=plt.cm.Blues):
+    
     '''
     This function prints and plots a model's confusion matrix.
 
@@ -173,10 +177,11 @@ def plot_confusion_matrix(cm, classes,
 
 # random forest feature importances plotter
 def plot_forest_features(model, X, num_features=15, to_print=True):
+    
     '''
-    This function plots feature importances for Random Forest models and
-    optionally prints  a dictionary with features and their measure of
-    importance.
+    This function plots feature importances for Random Forest models
+    and optionally prints a list of tuples with features and their 
+    measure of importance.
 
     Input
     -----
@@ -193,7 +198,7 @@ def plot_forest_features(model, X, num_features=15, to_print=True):
         `num_features=X.shape[1]`.
     to_print : bool
         Whether to print list of feature names and their impurity
-        decrease values.
+        decrease values (default=True).
         Printing can be turned off by setting `to_print=False`.
 
     Output
@@ -239,6 +244,7 @@ def plot_forest_features(model, X, num_features=15, to_print=True):
 # It has been edited slightly to suit my purposes.
 # calculate distance between two points
 def get_nearest(src_points, candidates, k_neighbors=3):
+    
     '''
     Function to calculate distances between points, comparing two lists.
 
@@ -292,6 +298,7 @@ def get_nearest(src_points, candidates, k_neighbors=3):
 
 
 def nearest_neighbor(gdf, name=None):
+    
     '''
     Function to find the nearest point within same GeoDataFrame.
 
@@ -345,6 +352,7 @@ def nearest_neighbor(gdf, name=None):
 
 # custom scoring function
 def good_precision(y_true, y_pred, **kwargs):
+    
     '''
     Custom scoring function calculating precision of 'Good' predictions.
 
