@@ -17,19 +17,23 @@ from sklearn.ensemble import RandomForestClassifier
 
 # dummy yes/no columns
 def yes_to_one(df, cols):
-    
     '''
     Turn columns with 'Yes' and 'No' values into 1s and 0s.
+
 
     Input
     -----
     df : Pandas DataFrame
+        DataFrame containing target data.
+
     cols : list (str)
         Column names.
+
 
     Output
     ------
     NONE : Overwrites the input columns!
+
     '''
 
     # replace values with 0 or 1 for each column in list
@@ -39,21 +43,25 @@ def yes_to_one(df, cols):
 
 # find outliers
 def find_extremes(df, num_std):
-    
     '''
     Function to find columns that contain outlier values.
+
 
     Input
     -----
     df : Pandas DataFrame
+        DataFrame containing target data.
+
     num_std : int
         Number of standard deviations from the mean to define outlier
         status.
+
 
     Output
     ------
     extreme_list : list (str)
         Columns that contain outlier values.
+
     '''
 
     # instantiate empty columns list
@@ -76,23 +84,28 @@ def find_extremes(df, num_std):
 
 # control value of outliers
 def rein_extremes(df, columns, num_std):
-    
     '''
     Function to replace outlier values using a multiple of the data's
     standard deviation.
 
+
     Input
     -----
     df : Pandas DataFrame
+        DataFrame containing target data.
+
     columns : list (str)
         Columns to transform.
+
     num_std : int
         Number of desired standard deviations from the mean to transform
         outlier data points.
 
+
     Output
     ------
     NONE : Overwrites the input columns!
+
     '''
 
     # loop over columns list
@@ -115,31 +128,39 @@ def rein_extremes(df, columns, num_std):
 
 
 # confusion matrix plotter
-def plot_confusion_matrix(cm, classes,
-                          normalize=False,
-                          title='Confusion matrix',
-                          cmap=plt.cm.Blues):
-    
+def plot_confusion_matrix(
+    cm, 
+    classes,
+    normalize=False,
+    title='Confusion matrix',
+    cmap=plt.cm.Blues
+):
     '''
     This function prints and plots a model's confusion matrix.
+
 
     Input
     -----
     cm : sklearn confusion matrix
         `sklearn.metrics.confusion_matrix(y_true, y_pred)`
+
     classes : list (str)
         Names of target classes.
+
 
     Optional input
     --------------
     normalize : bool
         Whether to apply normalization (default=False).
         Normalization can be applied by setting `normalize=True`.
+
     title : str
         Title of the returned plot.
+
     cmap : matplotlib color map
         For options, visit:
         `https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html`
+
 
     Output
     ------
@@ -147,6 +168,7 @@ def plot_confusion_matrix(cm, classes,
 
 
     [Code modified from work by Sean Abu Wilson.]
+
     '''
 
     # convert to percentage, if normalize set to True
@@ -177,18 +199,20 @@ def plot_confusion_matrix(cm, classes,
 
 # random forest feature importances plotter
 def plot_forest_features(model, X, num_features=15, to_print=True):
-    
     '''
     This function plots feature importances for Random Forest models
-    and optionally prints a list of tuples with features and their 
+    and optionally prints a list of tuples with features and their
     measure of importance.
+
 
     Input
     -----
     model : Random Forest model
         `sklearn.ensemble.RandomForestClassifier()`
+
     X : Pandas DataFrame
         Features used in model.
+
 
     Optional input
     --------------
@@ -196,10 +220,12 @@ def plot_forest_features(model, X, num_features=15, to_print=True):
         The number of features to plot/print (default=15).
         All feature importances can be shown by setting
         `num_features=X.shape[1]`.
+
     to_print : bool
         Whether to print list of feature names and their impurity
         decrease values (default=True).
         Printing can be turned off by setting `to_print=False`.
+
 
     Output
     ------
@@ -207,6 +233,7 @@ def plot_forest_features(model, X, num_features=15, to_print=True):
 
 
     [Code modified from work by Sean Abu Wilson.]
+
     '''
 
     # list of tuples (column index, measure of feature importance)
@@ -244,21 +271,24 @@ def plot_forest_features(model, X, num_features=15, to_print=True):
 # It has been edited slightly to suit my purposes.
 # calculate distance between two points
 def get_nearest(src_points, candidates, k_neighbors=3):
-    
     '''
     Function to calculate distances between points, comparing two lists.
+
 
     Input
     -----
     src_points : list (tuple)
         Location data (e.g., latitude and longitude).
+
     candidates : list (tuple)
         Location data to compare with src_points (e.g., latitude and longitude).
+
 
     Optional input
     --------------
     k_neighbors : int
         Number of closest points to find (default=3).
+
 
     Output
     ------
@@ -267,12 +297,13 @@ def get_nearest(src_points, candidates, k_neighbors=3):
         closest_dist : distance to nearest neighbor (in meters)
 
 
-    [Code modified from:
-     https://automating-gis-processes.github.io/site/notebooks/L3/nearest-neighbor-faster.html]
+    [Code modified from]:
+     https://automating-gis-processes.github.io/site/notebooks/L3/nearest-neighbor-faster.html
+
     '''
 
-    # NOTE: haversine distance which is implemented here is a bit slower 
-    # than using e.g. 'euclidean' metric but useful as we get the distance 
+    # NOTE: haversine distance which is implemented here is a bit slower
+    # than using e.g. 'euclidean' metric but useful as we get the distance
     # between points in meters.
 
     # create tree from the candidate points
@@ -287,8 +318,8 @@ def get_nearest(src_points, candidates, k_neighbors=3):
 
     # keep index of tree whose neighbor is being found and distance to the
     # neighbor
-    # NOTE: since I'm running this within the same dataframe, take first 
-    # index of distances, since distances[0] will have a distance of 0, 
+    # NOTE: since I'm running this within the same dataframe, take first
+    # index of distances, since distances[0] will have a distance of 0,
     # it being the same point.
     target_tree = indices[0]
     closest_dist = distances[1]
@@ -298,9 +329,9 @@ def get_nearest(src_points, candidates, k_neighbors=3):
 
 
 def nearest_neighbor(gdf, name=None):
-    
     '''
     Function to find the nearest point within same GeoDataFrame.
+
 
     Input
     -----
@@ -308,18 +339,23 @@ def nearest_neighbor(gdf, name=None):
         Assumes that the input Points are in WGS84 projection
         (latitude and longitude).
 
+
     Optional input
     --------------
     name : str
         Name for the returned Pandas Series (default=None).
 
+
     Output
     ------
     distances : Pandas Series
+        Series with neighbor distances in meters. Index values same as 
+        input GeoDataFrame.
 
 
-    [Code modified from:
-     https://automating-gis-processes.github.io/site/notebooks/L3/nearest-neighbor-faster.html]
+    [Code modified from]:
+     https://automating-gis-processes.github.io/site/notebooks/L3/nearest-neighbor-faster.html
+
     '''
 
     # parse coordinates from points and insert them into a numpy array as
@@ -336,15 +372,20 @@ def nearest_neighbor(gdf, name=None):
 
     # find the nearest points
     # -----------------------
-    # tree ==> index that corresponds to the tree whose closest neighbor  
+    # tree ==> index that corresponds to the tree whose closest neighbor
     # is being measured
     # neighbor_dist ==> distance to tree's closest neighbor (in meters)
 
     tree, neighbor_dist = get_nearest(src_points=radians, candidates=radians)
 
-    # convert to meters from radians and into a pandas series, using index from input gdf
+    # convert to meters from radians and into a pandas series, using index
+    # from input gdf
     earth_radius = 6371000
-    distances = pd.Series(neighbor_dist * earth_radius, index=gdf.index, name=name)
+    distances = pd.Series(
+        neighbor_dist *
+        earth_radius,
+        index=gdf.index,
+        name=name)
 
     # output geodataframe with new column
     return distances
@@ -352,20 +393,24 @@ def nearest_neighbor(gdf, name=None):
 
 # custom scoring function
 def good_precision(y_true, y_pred, **kwargs):
-    
     '''
     Custom scoring function calculating precision of 'Good' predictions.
+
 
     Input
     -----
     y_true : Pandas Series or array
         Actual labels.
+
     y_pred : Pandas Series or array
         Predicted labels.
 
+
     Output
     ------
-    float : precision score for 'Good' predictions
+    score : float
+        Precision score for only 'Good' predictions.
+
     '''
 
     # true positives
